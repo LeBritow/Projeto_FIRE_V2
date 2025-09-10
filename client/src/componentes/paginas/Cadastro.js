@@ -55,7 +55,7 @@ function Cadastro() {
             setCargo('');
 
             setTimeout(() => {
-                navegar('/login');
+                navegar('/');
             }, 2000);
 
         } catch (erro) {

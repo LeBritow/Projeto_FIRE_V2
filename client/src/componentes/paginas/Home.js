@@ -84,7 +84,7 @@ function Home() {
                                             {/* Reutilizando o componente GraficoTotalAnual para os estados */}
                                             <GraficoTotalAnual
                                                 localidade={estado.sigla}
-                                                tipoGrafico="bar" // Fixo como barras, conforme solicitado
+                                                tipoGrafico="bar" // Fixo como barras
                                             />
                                         </div>
                                     );

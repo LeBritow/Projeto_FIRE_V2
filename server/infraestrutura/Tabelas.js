@@ -1,7 +1,12 @@
+const bcrypt = require('bcrypt');
+
 class Tabelas {
     init(conexao){
         this.conexao = conexao;
-        this.criandoTabelaUsuario()
+        this.criandoTabelaUsuario(() => {
+            this.criaUsuarioPadrao();
+        });
+        this
         this.criandoTabelaHistoricoAgregado()
     }
     criandoTabelaUsuario(){
@@ -12,9 +17,46 @@ class Tabelas {
                 
             }else{
                 console.log("A tabela usuario criada com sucesso");
-                
+                  if (callback) {
+                    callback();
+                }
             }
         })
+    }
+    criaUsuarioPadrao() {
+        const emailPadrao = 'root@root.com';
+        const senhaPadrao = 'rootAdmin';
+        const saltRounds = 10;
+        
+        // Primeiro, verifica se o usuário padrão já existe
+        const sqlVerifica = `SELECT * FROM Usuario WHERE email = ?`;
+        this.conexao.query(sqlVerifica, [emailPadrao], async (erro, resultados) => {
+            if (erro) {
+                console.error("Erro ao verificar usuário padrão:", erro);
+                return;
+            }
+
+            if (resultados.length === 0) {
+                // Se o usuário não existe, procede com a criação
+                try {
+                    const senhaHash = await bcrypt.hash(senhaPadrao, saltRounds);
+                    const sqlInsere = `INSERT INTO Usuario (nome, email, senha, cargo) VALUES (?, ?, ?, ?)`;
+                    const params = ['root', emailPadrao, senhaHash, 'admin'];
+
+                    this.conexao.query(sqlInsere, params, erroInsercao => {
+                        if (erroInsercao) {
+                            console.error("Erro ao inserir usuário padrão:", erroInsercao);
+                        } else {
+                            console.log("Usuário 'root' criado com sucesso!");
+                        }
+                    });
+                } catch (hashError) {
+                    console.error("Erro ao gerar hash da senha do usuário padrão:", hashError);
+                }
+            } else {
+                console.log("O usuário 'root' já existe, não é necessário criar.");
+            }
+        });
     }
     criandoTabelaHistoricoAgregado(){
         const sql = `
