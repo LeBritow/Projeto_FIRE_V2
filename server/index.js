@@ -28,11 +28,12 @@ const Tabelas = require("./infraestrutura/Tabelas")
 const rotaUsuario = require("./rotas/rotaUsuario")
 const rotaAdmin = require("./rotas/rotaAdmin")
 const rotaHistorico = require("./rotas/rotaHistorico")
+const rotaHardware = require("./rotas/rotaHardware");
 
 app.use("/",rotaUsuario)
 app.use("/admin", rotaAdmin) 
 app.use("/api",rotaHistorico)
-
+app.use("/api/hardware", rotaHardware);
 
 conexao.connect(connectionError => {
 

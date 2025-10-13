@@ -6,10 +6,11 @@ class Tabelas {
         this.criandoTabelaUsuario(() => {
             this.criaUsuarioPadrao();
         });
-        this
         this.criandoTabelaHistoricoAgregado()
+        this.criandoTabelaLeitura_Sensores()
+
     }
-    criandoTabelaUsuario(){
+    criandoTabelaUsuario(callback){
         const sql = `CREATE TABLE if not exists Usuario(idUsuario int auto_increment, nome varchar(255),email varchar(255), senha varchar(255), cargo varchar(255), PRIMARY KEY(idUsuario))`
         this.conexao.query(sql,erro=>{
             if(erro){
@@ -17,7 +18,7 @@ class Tabelas {
                 
             }else{
                 console.log("A tabela usuario criada com sucesso");
-                  if (callback) {
+                if (callback) {
                     callback();
                 }
             }
@@ -80,6 +81,29 @@ class Tabelas {
                     UNIQUE KEY idx_localidade_ano (localidade, ano) 
                 );`
 
+        this.conexao.query(sql,erro=>{
+            if(erro){
+                console.log(erro);
+                
+            }else{
+                console.log("A tabela usuario criada com sucesso");
+                
+            }
+        })
+    }
+    criandoTabelaLeitura_Sensores(){
+        const sql = `
+            CREATE TABLE IF NOT EXISTS leituras_sensores (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                device_id VARCHAR(255) NOT NULL, -- Para identificar qual dispositivo enviou o dado
+                temperatura DECIMAL(5, 2),
+                pressao INT,
+                umidade DECIMAL(5, 2),
+                co2 INT,
+                tvocs INT,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            `
         this.conexao.query(sql,erro=>{
             if(erro){
                 console.log(erro);

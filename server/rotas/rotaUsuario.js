@@ -4,54 +4,62 @@ const rota = express.Router();
 
 // segurança
 const { SignJWT } = require('jose');
-const crypto = require('crypto');
+const { subtle } = require('node:crypto'); 
 // Infra e modelos
 const Usuario = require("../modelos/Usuario")
 
 const { JWT_SECRET_KEY, JWT_ALGORITHM } = require('../infraestrutura/jwtConfig')
 
 
+
+function bufferToHexString(buffer) {
+    // Cria uma visão de array de bytes do buffer
+    const byteArray = new Uint8Array(buffer);
+    // Mapeia cada byte para sua representação hexadecimal de 2 dígitos e junta tudo
+    return Array.from(byteArray)
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase();
+}
+
 async function isPasswordPwned(password) {
-    // 1. Gera o hash SHA-1 da senha (formato exigido pela API)
-    const sha1Hash = crypto.createHash('sha1').update(password).digest('hex').toUpperCase();
-    const prefix = sha1Hash.substring(0, 5);
-    const suffix = sha1Hash.substring(5);
-
-    const apiUrl = `https://api.pwnedpasswords.com/range/${prefix}`;
-
     try {
-    
-        const response = await fetch(apiUrl);
+        // 1. Converte a senha (string) para um formato que a API de criptografia entende (Buffer)
+        const passwordBuffer = new TextEncoder().encode(password);
 
+        // 2. Gera o hash SHA-1 da senha usando a API moderna (assíncrona)
+        const hashBuffer = await subtle.digest('SHA-1', passwordBuffer);
+        
+        // 3. Converte o resultado (ArrayBuffer) para uma string hexadecimal
+        const sha1Hash = bufferToHexString(hashBuffer);
+
+        const prefix = sha1Hash.substring(0, 5);
+        const suffix = sha1Hash.substring(5);
+        const apiUrl = `https://api.pwnedpasswords.com/range/${prefix}`;
+
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`Erro ao contatar a API de senhas: Status ${response.status}`);
         }
 
-   
         const textData = await response.text();
-        const hashes = textData.split('\r\n'); 
+        const hashes = textData.split('\r\n');
 
-    
         for (const line of hashes) {
-            const [hashSuffix, count] = line.split(':');
+            const [hashSuffix] = line.split(':');
             if (hashSuffix === suffix) {
-               
-                console.log(`AVISO: A senha fornecida foi encontrada em vazamentos ${count} vezes.`);
-                return true;
+                return true; // Senha encontrada!
             }
         }
 
-       
-        return false;
+        return false; // Senha segura
 
     } catch (error) {
-     
-        console.error("Erro durante a verificação da senha na API Pwned Passwords:", error.message);
-        
-      
+        console.error("Erro durante a verificação da senha:", error.message);
         return false;
     }
 }
+
 
 // const verificarToken = require("../infraestrutura/verificacaoJWT")
 
@@ -106,3 +114,7 @@ rota.post("/cadastro", async (req,res)=>{
 })
 
 module.exports = rota;
+
+
+
+
