@@ -86,16 +86,17 @@ class Tabelas {
                 console.log(erro);
                 
             }else{
-                console.log("A tabela usuario criada com sucesso");
+                console.log("A tabela historico_agregado criada com sucesso");
                 
             }
         })
     }
     criandoTabelaLeitura_Sensores(){
+        // device -- Para identificar qual dispositivo enviou o dado
         const sql = `
             CREATE TABLE IF NOT EXISTS leituras_sensores (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                device_id VARCHAR(255) NOT NULL, -- Para identificar qual dispositivo enviou o dado
+                device_id VARCHAR(255) NOT NULL, 
                 temperatura DECIMAL(5, 2),
                 pressao INT,
                 umidade DECIMAL(5, 2),
@@ -109,7 +110,7 @@ class Tabelas {
                 console.log(erro);
                 
             }else{
-                console.log("A tabela usuario criada com sucesso");
+                console.log("A tabela leituras_sensores criada com sucesso");
                 
             }
         })
