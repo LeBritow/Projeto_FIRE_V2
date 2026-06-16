@@ -1,6 +1,14 @@
 # Projeto FIRE
 
-Este projeto é um sistema completo (Full Stack + IoT) para monitoramento ambiental, integrando sensores físicos em tempo real (via LoRaWAN) e visualização de dados históricos de queimadas.
+![License](https://img.shields.io/badge/license-MIT-green)
+![Node](https://img.shields.io/badge/node-%3E%3D14-brightgreen)
+![Status](https://img.shields.io/badge/status-TCC-blue)
+
+<p align="center">
+  <img src="client/public/logo512.png" alt="Projeto FIRE Logo" width="150"/>
+</p>
+
+**Projeto de TCC** — Sistema completo (Full Stack + IoT) para monitoramento ambiental, integrando sensores físicos em tempo real (via LoRaWAN) e visualização de dados históricos de queimadas.
 
 O sistema é composto por:
 1.  **Hardware:** Módulos ESP32 LoRa com sensores de qualidade do ar, temperatura, pressão e umidade.
@@ -72,9 +80,8 @@ Esta placa recebe os dados via rádio e repassa para o servidor via Cabo USB.
 ---
 
 ## Acesso ao Sistema
-Para o primeiro acesso, utilize o administrador padrão criado automaticamente:
-* **Email:** `root@root.com`
-* **Senha:** `rootAdmin`
+O sistema cria automaticamente um administrador padrão na primeira execução.
+As credenciais são definidas via **variáveis de ambiente** — consulte o arquivo `.env.example` na raiz do projeto para configurar.
 
 ---
 
@@ -92,3 +99,11 @@ Para o primeiro acesso, utilize o administrador padrão criado automaticamente:
 
 3.  **Arquivos Removidos:**
     Para envio, as pastas `node_modules` e arquivos de build foram removidos para leveza. O comando `npm install` restaura tudo.
+
+---
+
+## Licença
+
+Este projeto é um **Trabalho de Conclusão de Curso (TCC)** e está licenciado sob a **MIT License** — veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+Se você utilizar ou referenciar este trabalho em seus estudos ou projetos, por favor, dê os devidos créditos aos autores. A monografia completa está disponível em [`Docs/`](Docs/).
