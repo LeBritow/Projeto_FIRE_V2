@@ -1,21 +1,14 @@
 const express = require("express")
 const rota = express.Router();
 
-
-// segurança
 const { SignJWT } = require('jose');
 const { subtle } = require('node:crypto'); 
-// Infra e modelos
 const Usuario = require("../modelos/Usuario")
 
 const { JWT_SECRET_KEY, JWT_ALGORITHM } = require('../infraestrutura/jwtConfig')
 
-
-
 function bufferToHexString(buffer) {
-    // Cria uma visão de array de bytes do buffer
     const byteArray = new Uint8Array(buffer);
-    // Mapeia cada byte para sua representação hexadecimal de 2 dígitos e junta tudo
     return Array.from(byteArray)
         .map(byte => byte.toString(16).padStart(2, '0'))
         .join('')
@@ -24,13 +17,10 @@ function bufferToHexString(buffer) {
 
 async function isPasswordPwned(password) {
     try {
-        // 1. Converte a senha (string) para um formato que a API de criptografia entende (Buffer)
         const passwordBuffer = new TextEncoder().encode(password);
 
-        // 2. Gera o hash SHA-1 da senha usando a API moderna (assíncrona)
         const hashBuffer = await subtle.digest('SHA-1', passwordBuffer);
         
-        // 3. Converte o resultado (ArrayBuffer) para uma string hexadecimal
         const sha1Hash = bufferToHexString(hashBuffer);
 
         const prefix = sha1Hash.substring(0, 5);
@@ -48,20 +38,17 @@ async function isPasswordPwned(password) {
         for (const line of hashes) {
             const [hashSuffix] = line.split(':');
             if (hashSuffix === suffix) {
-                return true; // Senha encontrada!
+                return true;
             }
         }
 
-        return false; // Senha segura
+        return false;
 
     } catch (error) {
         console.error("Erro durante a verificação da senha:", error.message);
         return false;
     }
 }
-
-
-// const verificarToken = require("../infraestrutura/verificacaoJWT")
 
 rota.post("/login",async (req,res)=>{
 
@@ -109,7 +96,6 @@ rota.post("/cadastro", async (req,res)=>{
     const usuarioCadastro = await Usuario.cadastro(nome,email,senha,cargo)
     
      res.status(200).json({ mensagem: "Cadastro realizado com sucesso!" });
-    
 
 })
 

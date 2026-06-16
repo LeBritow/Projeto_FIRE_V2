@@ -1,5 +1,3 @@
-
-
 .containerMenu {
     display: flex;
     justify-content: space-between; 
@@ -9,10 +7,6 @@
     padding: 10px 20px;
    
 }
-
-/* .logoContainer {
-
-} */
 
 .icone_site {
     width: 48px;
@@ -29,7 +23,6 @@
     gap: 20px; 
 }
 
-/* Estilo base para todos os links dentro dos <li> da listaLinks */
 .listaLinks li a {
     text-decoration: none;
     color: white;
@@ -38,12 +31,10 @@
     position: relative;
 }
 
-/* Efeito hover nos links */
 .listaLinks li a:hover {
     color: #E67E22;
 }
 
-/* Efeito de borda inferior animada no hover  */
 .listaLinks li a::after {
     content: '';
     position: absolute;
@@ -63,7 +54,6 @@
 }
 
 
-/* Estilos para a seção do usuário quando logado (o <li> que contém a saudação e o botão) */
 .itemUsuario {
     display: flex;
     align-items: center;

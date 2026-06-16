@@ -1,5 +1,3 @@
-/* GraficosHistoricos.module.css */
-
 .chartContainer {
     width: 100%;
     max-width: 900px; 
@@ -18,7 +16,7 @@
 }
 
 .errorText {
-    composes: feedbackText; /* Herda os estilos de feedbackText */
+    composes: feedbackText;
     color: rgb(216, 0, 12);
     font-weight: bold;
 }

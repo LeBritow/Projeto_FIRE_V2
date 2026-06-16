@@ -6,13 +6,11 @@ import Feedback from '../funcionalidades/Feedback';
 function Cadastro() {
     const urlAPI = process.env.REACT_APP_API_URL;
 
-    // Estados do formulário
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [cargo, setCargo] = useState('');
 
-    // Feedback e carregamento
     const [mensagem, setMensagem] = useState({ texto: '', tipo: '' });
     const [carregando, setCarregando] = useState(false);
 

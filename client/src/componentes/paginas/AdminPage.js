@@ -1,5 +1,4 @@
 import  { useState } from 'react';
-import Menu from '../layout/Menu';
 import { useAuth } from '../funcionalidades/AuthContext';
 import styles from './AdminPage.module.css'; 
 
@@ -62,8 +61,6 @@ function AdminPage() {
                 <h1>Painel de Administração</h1>
                 <p className={styles.subtitle}>Upload de Dados de Queimadas (.csv)</p>
 
-                {/* ### AQUI ESTÁ A MUDANÇA ### */}
-                {/* Renderiza um <p> condicional para feedback, com classes de estilo dinâmicas */}
                 {feedback.message && (
                     <p className={`${styles.feedbackMessage} ${styles[feedback.type]}`}>
                         {feedback.message}

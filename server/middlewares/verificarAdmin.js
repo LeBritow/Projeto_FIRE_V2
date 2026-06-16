@@ -6,8 +6,6 @@ const verificarAdmin = (req, res, next) => {
         
         next();
     } else {
-        // Se não for admin (ou se req.usuarioLogado não existir por algum motivo),
-        // ele não tem permissão.
         res.status(403).json({ mensagem: 'Acesso negado. Requer privilégios de administrador.' });
     
     }

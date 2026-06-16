@@ -20,7 +20,6 @@ function Menu() {
                 
                 
                 {usuario ? (
-                    // Seção do usuário logado DENTRO de um <li>
                     <>
                         <li><Link to="/gerenciar">Gerenciar</Link></li>
                         {usuario.cargo === 'admin' ?  [
@@ -35,7 +34,6 @@ function Menu() {
                         </li>
                     </>
                 ) : (
-                    // Links de Login e Cadastro deslogado 
                     <>
                         <li><Link to="/login">Login</Link></li>
                         

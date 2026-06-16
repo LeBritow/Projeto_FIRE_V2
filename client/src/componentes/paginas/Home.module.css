@@ -17,9 +17,7 @@
     margin-right: 10px;
     font-weight: bold;
 }
-/* Estilo principal para o nosso <select> customizado */
 .anoSelect {
-    /* Aparência e espaçamento */
     display: inline-block;
     padding: 10px 25px ; 
     font-size: 16px;
@@ -31,20 +29,16 @@
     cursor: pointer;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-    /* O truque para esconder a seta padrão do navegador */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
 
-/* Estilo quando o select está em foco (clicado) */
 .anoSelect:focus {
     outline: none;
-    border-color: #22574A; /* Cor verde do seu menu */
+    border-color: #22574A;
     box-shadow: 0 0 0 3px rgba(34, 87, 74, 0.2);
 }
-
-
 
 .graficoContainer {
     margin-top: 40px;
@@ -52,34 +46,27 @@
  
 }
 
-/* Estilo para cada seção de região (Sudeste, Sul, etc.) */
-
-/* Aumentar o espaçamento entre as seções */
 .geralSection,
 .regionSection {
     margin-top: 60px; 
     margin-bottom: 40px; 
 }
 
-/* Ajuste para garantir que as seções não fiquem tão próximas */
 .regionSection {
     padding-bottom: 40px; 
 }
 
-/* Ajuste da margem entre os gráficos da grade */
 .chartsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 60px; 
 }
 
-/* Adicionando espaçamento ao título da região */
 .regionTitle {
     margin-bottom: 40px; 
 }
 
 
 .fullWidth {
-    /* Diz ao item para começar na primeira coluna e terminar na última (-1) */
     grid-column: 1 / -1;
 }

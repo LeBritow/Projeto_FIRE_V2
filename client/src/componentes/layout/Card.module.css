@@ -1,48 +1,70 @@
-.containerCard{
-    display: grid;
-     justify-items: center;
-     /* align-content: center; */
-    max-width: 450px;
-    background-color:#5D8D7B;
+.containerCard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    background-color: #22574A;
     color: white;
-    border: 1px solid #6B462D;
-    border-radius: 3px;
-    padding: 10px;
-    gap: 5px;
-   
-}
-.divCard{
-    margin: 5px;
-}
-/* a tag span dos cards  */
-
-.spanCard{
-    margin: 5px;
-    border: 1px solid white;
-    padding: 5px;
-    border-radius: 3px;
+    border: 1px solid #1a4339;
+    border-radius: 12px;
+    padding: 20px;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.alerta{
+
+.containerCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.divCard {
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.gridDados {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.itemDado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+    border: 2px solid transparent;
+}
+
+.label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.valor {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.alerta {
+    background-color: rgba(246, 224, 94, 0.2);
     border-color: #F6E05E;
     color: #F6E05E;
-    /* background-color: rgb(233, 233, 153); */
-    font-weight: 600;
 }
-.grave{
+
+.grave {
+    background-color: rgba(220, 38, 38, 0.2);
     border-color: #DC2626;
-    color: #DC2626;
-    background: rgb(245, 123, 123);
-    font-weight: 600;
-}
-
-/* resultado dos valores card  */
-.valoresCard{
-
-    margin-top: 10px;
-    padding: 15px;
-    /* background-color: rebeccapurple; */
-    border: 1px solid white;
-    border-radius: 3px;
-    color: white;
+    color: #faaeb1;
 }

@@ -1,5 +1,3 @@
-
-
 .adminContainer {
     display: flex;
     flex-direction: column;
@@ -58,8 +56,6 @@
     border-color: #f5c6cb;
 }
 
-
-
 .formGroup {
     margin-bottom: 25px;
 }
@@ -86,7 +82,7 @@
 
 .selectInput:focus, .fileInputLabel:hover {
     outline: none;
-    border-color: #22574A; /* Usa o verde principal no foco/hover */
+    border-color: #22574A;
     box-shadow: 0 0 0 3px rgba(34, 87, 74, 0.2);
 }
 
@@ -106,16 +102,16 @@
     font-size: 18px;
     font-weight: bold;
     color: #fff;
-    background-color: #22574A; /* <<< Usa o verde principal do seu menu */
+    background-color: #22574A;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
-    margin-top: 10px; /* Adiciona um espaço acima do botão */
+    margin-top: 10px;
 }
 
 .uploadButton:hover:not(:disabled) {
-    background-color: #1a4339; /* Verde mais escuro no hover */
+    background-color: #1a4339;
 }
 
 .uploadButton:active:not(:disabled) {

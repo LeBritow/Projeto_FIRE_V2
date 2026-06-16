@@ -1,6 +1,6 @@
 const fs = require('fs');
 const csv = require('csv-parser');
-// A conexão direta com o banco não é mais necessária aqui, pois o Model cuidará disso.
+
 const HistoricoAgregadoModel = require('../modelos/Historico_agregado'); // Importa o Model
 
 const parseNumericValue = (value) => {
@@ -23,7 +23,6 @@ async function processarHistoricoAgregado(caminhoArquivo, tipoDeDado) {
     }
 
     return new Promise((resolve, reject) => {
-        // Agora vamos criar um array de OBJETOS, que é mais descritivo
         const registrosParaSalvar = []; 
         let contadorLidos = 0;
 
@@ -32,7 +31,6 @@ async function processarHistoricoAgregado(caminhoArquivo, tipoDeDado) {
             .on('data', (linha) => {
                 contadorLidos++;
                 
-                // Cria um objeto limpo e formatado
                 const registroObjeto = {
                     localidade: localidade,
                     ano: parseNumericValue(linha.Ano),
@@ -60,9 +58,6 @@ async function processarHistoricoAgregado(caminhoArquivo, tipoDeDado) {
                 console.log(`Processando ${contadorLidos} registros para a localidade '${localidade}'...`);
                 
                 try {
-                    // *** AQUI ESTÁ A MUDANÇA PRINCIPAL ***
-                    // O serviço agora chama o método do Model, passando os dados limpos.
-                    // A lógica SQL está encapsulada no Model.
                     const resultado = await HistoricoAgregadoModel.inserirOuAtualizarEmMassa(registrosParaSalvar);
                     resolve({ lidos: contadorLidos, linhasAfetadas: resultado.affectedRows });
                 } catch (error) {

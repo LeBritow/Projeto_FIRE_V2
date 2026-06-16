@@ -1,5 +1,5 @@
 .containerEstilo {
-    width: 95%; /* Usa uma porcentagem da largura da tela */
+    width: 95%;
     max-width: 1400px; 
     
     
@@ -8,7 +8,6 @@
     padding: 0 15px; 
     box-sizing: border-box; 
 }
-/* Você pode manter esta classe se a usar em outro lugar, caso contrário, pode remover */
 .tiposColunas {
     flex-direction: column;
 }

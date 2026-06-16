@@ -6,17 +6,16 @@ class Tabelas {
         this.criandoTabelaUsuario(() => {
             this.criaUsuarioPadrao();
         });
-        this.criandoTabelaHistoricoAgregado()
-        this.criandoTabelaLeitura_Sensores()
-
+        this.criandoTabelaHistoricoAgregado();
+        this.criandoTabelaLeitura_Sensores();
     }
+
     criandoTabelaUsuario(callback){
         const sql = `CREATE TABLE if not exists Usuario(idUsuario int auto_increment, nome varchar(255),email varchar(255), senha varchar(255), cargo varchar(255), PRIMARY KEY(idUsuario))`
-        this.conexao.query(sql,erro=>{
+        this.conexao.query(sql, erro => {
             if(erro){
                 console.log(erro);
-                
-            }else{
+            } else {
                 console.log("A tabela usuario criada com sucesso");
                 if (callback) {
                     callback();
@@ -24,12 +23,12 @@ class Tabelas {
             }
         })
     }
+
     criaUsuarioPadrao() {
         const emailPadrao = 'root@root.com';
         const senhaPadrao = 'rootAdmin';
         const saltRounds = 10;
         
-        // Primeiro, verifica se o usuário padrão já existe
         const sqlVerifica = `SELECT * FROM Usuario WHERE email = ?`;
         this.conexao.query(sqlVerifica, [emailPadrao], async (erro, resultados) => {
             if (erro) {
@@ -38,7 +37,6 @@ class Tabelas {
             }
 
             if (resultados.length === 0) {
-                // Se o usuário não existe, procede com a criação
                 try {
                     const senhaHash = await bcrypt.hash(senhaPadrao, saltRounds);
                     const sqlInsere = `INSERT INTO Usuario (nome, email, senha, cargo) VALUES (?, ?, ?, ?)`;
@@ -59,6 +57,7 @@ class Tabelas {
             }
         });
     }
+
     criandoTabelaHistoricoAgregado(){
         const sql = `
                 CREATE TABLE if not exists historico_agregado (
@@ -81,36 +80,34 @@ class Tabelas {
                     UNIQUE KEY idx_localidade_ano (localidade, ano) 
                 );`
 
-        this.conexao.query(sql,erro=>{
+        this.conexao.query(sql, erro => {
             if(erro){
                 console.log(erro);
-                
-            }else{
-                console.log("A tabela usuario criada com sucesso");
-                
+            } else {
+                console.log("A tabela historico_agregado criada com sucesso");
             }
         })
     }
+
     criandoTabelaLeitura_Sensores(){
         const sql = `
             CREATE TABLE IF NOT EXISTS leituras_sensores (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                device_id VARCHAR(255) NOT NULL, -- Para identificar qual dispositivo enviou o dado
+                device_id VARCHAR(255) NOT NULL, 
                 temperatura DECIMAL(5, 2),
                 pressao INT,
                 umidade DECIMAL(5, 2),
                 co2 INT,
                 tvocs INT,
+                rssi INT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
             `
-        this.conexao.query(sql,erro=>{
+        this.conexao.query(sql, erro => {
             if(erro){
                 console.log(erro);
-                
-            }else{
-                console.log("A tabela usuario criada com sucesso");
-                
+            } else {
+                console.log("A tabela leituras_sensores criada com sucesso");
             }
         })
     }

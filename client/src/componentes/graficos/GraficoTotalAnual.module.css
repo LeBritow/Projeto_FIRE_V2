@@ -9,7 +9,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Adicionando um pequeno espaçamento interno nos gráficos */
 .feedbackText {
     text-align: center;
     font-size: 1.1rem;
@@ -17,7 +16,6 @@
     padding: 40px;
 }
 
-/* Melhorando a visibilidade dos erros */
 .errorText {
     composes: feedbackText;
     color: #D8000C;

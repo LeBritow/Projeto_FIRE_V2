@@ -1,5 +1,3 @@
-
-
 .feedbackContainer {
     position: fixed; 
     top: 20px;
@@ -17,14 +15,12 @@
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Estilos para mensagem de sucesso */
 .success {
     background-color: #DFF2BF;
     color: #4F8A10;
     border: 1px solid #BDEE72;
 }
 
-/* Estilos para mensagem de erro */
 .error {
     background-color: #FFD2D2;
     color: #D8000C;
@@ -48,7 +44,6 @@
 }
 
 
-/* Animação de entrada */
 @keyframes fadeIn {
     from {
         opacity: 0;

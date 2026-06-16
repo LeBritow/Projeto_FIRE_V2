@@ -5,17 +5,14 @@ import {
     Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend
 } from 'chart.js';
 
-// Registra todos os componentes que poderemos usar
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
-// A função agora recebe as props para localidade e tipo de gráfico
 function GraficoTotalAnual({ localidade, tipoGrafico }) {
     const [chartData, setChartData] = useState({ datasets: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Se a localidade não for fornecida, não fazemos nada
         if (!localidade) {
             setLoading(false);
             setError("Nenhuma localidade selecionada.");
@@ -26,7 +23,6 @@ function GraficoTotalAnual({ localidade, tipoGrafico }) {
             setLoading(true);
             setError('');
             try {
-                // A URL da API agora é dinâmica, baseada na prop 'localidade'
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/api/historico-anual?localidade=${localidade}`);
                 if (!response.ok) throw new Error('Falha ao buscar dados anuais da API.');
                 
@@ -43,7 +39,7 @@ function GraficoTotalAnual({ localidade, tipoGrafico }) {
                         data: valores,
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                        tension: tipoGrafico === 'line' ? 0.1 : 0, // Curva suave apenas para gráficos de linha
+                        tension: tipoGrafico === 'line' ? 0.1 : 0,
                     }],
                 });
             } catch (err) {
@@ -54,7 +50,7 @@ function GraficoTotalAnual({ localidade, tipoGrafico }) {
         };
 
         fetchData();
-    }, [localidade]); // O efeito roda sempre que a 'localidade' mudar
+    }, [localidade, tipoGrafico]);
 
     const options = {
         responsive: true,
@@ -74,12 +70,10 @@ function GraficoTotalAnual({ localidade, tipoGrafico }) {
     if (loading) return <p className={styles.feedbackText}>Carregando gráfico...</p>;
     if (error) return <p className={styles.errorText}>{error}</p>;
 
-    // Lógica para renderizar o tipo de gráfico correto
     const renderChart = () => {
         if (tipoGrafico === 'line') {
             return <Line options={options} data={chartData} />;
         }
-        // O padrão será 'bar'
         return <Bar options={options} data={chartData} />;
     };
 

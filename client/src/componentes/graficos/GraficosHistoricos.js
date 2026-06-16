@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import styles from './GraficosHistoricos.module.css'; // Importa o nosso novo CSS
+import styles from './GraficosHistoricos.module.css';
 import {
     Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend
 } from 'chart.js';
 
-// Registra os componentes necessários do Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
 
 function GraficosHistoricos({ localidade, ano }) {
     const [chartData, setChartData] = useState({ datasets: [] });
@@ -90,7 +88,6 @@ function GraficosHistoricos({ localidade, ano }) {
     if (loading) return <p className={styles.feedbackText}>Carregando gráfico...</p>;
     if (error) return <p className={styles.errorText}>{error}</p>;
 
-    // Aplica a classe CSS ao container do gráfico
     return (
         <div className={styles.chartContainer}>
             <Bar options={options} data={chartData} />
@@ -98,5 +95,4 @@ function GraficosHistoricos({ localidade, ano }) {
     );
 }
 
-// EXPORT CORRIGIDO para corresponder ao novo nome da função
 export default GraficosHistoricos;
