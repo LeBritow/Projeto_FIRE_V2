@@ -102,6 +102,15 @@ As credenciais são definidas via **variáveis de ambiente** — consulte o arqu
 
 ---
 
+## Autores
+
+Este TCC foi desenvolvido por:
+
+- **Gustavo Brito**
+- **Kaio Luiz Ferreira**
+
+Orientador: *Prof. Dr. José Augusto Fabri*
+
 ## Licença
 
 Este projeto é um **Trabalho de Conclusão de Curso (TCC)** e está licenciado sob a **MIT License** — veja o arquivo [LICENSE](LICENSE) para detalhes.
