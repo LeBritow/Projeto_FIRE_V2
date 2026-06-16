@@ -109,7 +109,7 @@ Este TCC foi desenvolvido por:
 - **Gustavo Brito**
 - **Kaio Luiz Ferreira**
 
-Orientador: *Prof. Dr. José Augusto Fabri*
+Orientador: *Prof. Dr. Uesclei Costa Santos*
 
 ## Licença
 
